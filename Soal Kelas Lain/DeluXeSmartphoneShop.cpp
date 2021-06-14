@@ -334,6 +334,14 @@ struct Node *searchDelete(Node **node, char phoneName[]){
 	}
 }
 
+void deleteAll(Node **node)
+{
+	while(root != NULL)
+	{
+		root = deleteNode(root , (*node)->phoneName, (*node)->phoneDescription, (*node)->phoneType, (*node)->phonePrice);
+	}
+}
+
 int main()
 {
 	int id = 1, loop = 1, choice;
@@ -418,6 +426,7 @@ int main()
 				searchDelete(&root,phoneName);
 			}
 		}else if(choice==4){
+			deleteAll(&root);
 			loop = 0;
 			system("exit");
 		}
