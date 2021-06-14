@@ -232,12 +232,23 @@ int checkData(struct Node *root){
 }
 
 int countWords(char phoneName[]){
+	int spasi[30];
 	int count = 0;
+	int jumlah = 0;
 	for(int i = 0; phoneName[i]; i++)  
     {
-    	if(phoneName[i]==32) count++;
+    	spasi[i] = isspace(phoneName[i+1]);
+    	count++;
  	}
- 	return count;
+ 	for(int j = 0 ;j < count ;j++){
+ 		if(spasi[j]==8 && spasi[j+1]==8){
+ 			return -1;
+ 			break;
+		 }else if(spasi[j]==8 && spasi[j+1]==0){
+			jumlah++;		 	
+		 }
+	 }
+ 	return jumlah;
 }
 
 int cekKapital(char phoneDescription[]){
@@ -265,8 +276,8 @@ struct Node *searchInsert(Node **node, char phoneName[]){
 			do{
 				printf("Input Phone's Name [7 - 25 characters | min. 2 words | must be unique]: ");
 				scanf(" %[^\n]s", &namaHandphone); fflush(stdin);
-				wordCount = countWords(namaHandphone) + 1;
-			}while(strlen(namaHandphone) < 7 || strlen(namaHandphone) > 25 || wordCount < 2);
+				wordCount = countWords(namaHandphone);
+			}while(strlen(namaHandphone) < 7 || strlen(namaHandphone) > 25 || wordCount <= 1);
 			
 			searchInsert(&root,namaHandphone);
 		}
