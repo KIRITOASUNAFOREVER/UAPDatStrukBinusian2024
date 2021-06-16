@@ -232,23 +232,19 @@ int checkData(struct Node *root){
 }
 
 int countWords(char phoneName[]){
-	int spasi[30];
 	int count = 0;
-	int jumlah = 0;
-	for(int i = 0; phoneName[i]; i++)  
-    {
-    	spasi[i] = isspace(phoneName[i+1]);
-    	count++;
+	int panjang = strlen(phoneName);
+	for(int i=0;i<panjang;i++){
+		if(i==panjang-1){
+			continue;
+		}
+		else{
+			if(phoneName[i]==32 && phoneName[i+1]>32){
+				count++;
+   			}
+  		}
  	}
- 	for(int j = 0 ;j < count ;j++){
- 		if(spasi[j]==8 && spasi[j+1]==8){
- 			return -1;
- 			break;
-		 }else if(spasi[j]==8 && spasi[j+1]==0){
-			jumlah++;		 	
-		 }
-	 }
- 	return jumlah;
+ 	return count;
 }
 
 int cekKapital(char phoneDescription[]){
@@ -371,7 +367,7 @@ int main()
 			int jumlahData = checkData(root);
 			if(jumlahData < 1){
 				system("cls");
-				printf("No phone available! please come back later...");
+				printf("No phone available! please come back later...\n\n");
 				system("PAUSE");
 			}else{
 				printf("%d\n",&jumlahData);
@@ -413,7 +409,7 @@ int main()
 			int jumlahData = checkData(root);
 			if(jumlahData < 1){
 				system("cls");
-				printf("No phone available! please come back later...");
+				printf("No phone available! please come back later...\n\n");
 				system("PAUSE");
 			}else{
 				system("cls");
